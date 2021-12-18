@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  application:
+    container_name: accounting
+    build: .
+    image: accounting:latest
+    ports:
+      - 8080:8080
+    environment:
+      DB_URL: "jdbc:postgresql://database:5432/accounting"
+      DB_USERNAME: "username"
+      DB_PASSWORD: "password"
+      APP_TRANSACTION_LIMIT: 200
+
+  database:
+    container_name: accounting-postgres
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_USER: "username"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "accounting"
