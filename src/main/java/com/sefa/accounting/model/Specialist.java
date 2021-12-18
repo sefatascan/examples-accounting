@@ -14,12 +14,12 @@ import java.util.Set;
 @Data
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"firstName", "lastName", "email"}))
-public class Specialist extends AbstractEntity{
+public class Specialist extends AbstractEntity {
 
     private String firstName;
     private String lastName;
     private String email;
 
-    @OneToMany(mappedBy = "specialist", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "specialist", fetch = FetchType.LAZY)
     private Set<Transaction> transaction;
 }

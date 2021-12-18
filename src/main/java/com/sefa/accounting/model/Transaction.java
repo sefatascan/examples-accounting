@@ -13,20 +13,21 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Data
 @Entity
-public class Transaction extends AbstractEntity{
+public class Transaction extends AbstractEntity {
 
     @Column(scale = 2)
     private BigDecimal amount;
 
     private String productName;
 
+    //TODO: fail olduğunda unique olmamalı
     @Column(unique = true, nullable = false)
     private String billNo;
 
     @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "specialist_id", nullable = false)
     private Specialist specialist;
 }
