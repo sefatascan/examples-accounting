@@ -12,9 +12,22 @@
 
 ## Overview
 
+This is a spring-boot application. It was developed for personal development purposes. It contains features such as
+validation, pageable, dockerize, openapi doc, spring data, exception handling, lombok, auditing.
+
 ## Environment Requirements
 
+There are several requirements before startup the application. You can startup with different methods, we cover it in
+the  [Installation](#installation) step.
+
+* [docker](#docker) step, you need to have `docker` on your PC.
+  see  [docker installation](https://docs.docker.com/engine/install/)
+
+* [maven](#maven) step, you need to have `java` on your PC.
+
 ## Installation
+
+Before installation, you need to clone this repository.
 
 ```
 $ git clone https://github.com/sefatascan/examples-accounting.git
@@ -22,23 +35,60 @@ $ cd accounting
 ```
 
 ### docker
+
+In this step, you can run the application with only the docker requirement. It may take some time if the _images_ it
+needs are not available.
+
+Before running the command, you should check the available of the ports on your PC.
+
+* `:8080` application port
+* `:5435` database port needed by the application (if you need connect to db in localhost)
+
+If this port is not available, You need to modify the `docker-compose.yml` file.
+
+```yml
+    ports: # application
+      - 8080:8080 => [changeable port]:8080
+    ports: # database
+      - 5435:5432 => [changeable port]:5432
+```
+
+After all checks are provided you can run the command.
+
 ```
 $ docker-compose up -d
 ```
 
 ### maven
-```
-$ ./mvnv clean install
-$ java -jar target/accounting-0.0.1-SNAPSHOT.jar
-```
+
+In this step, you need java and set it as environment variable.
+
+* If you want to package and run the application.
+  ```
+  $ ./mvnv clean install
+  $ java -jar target/accounting-0.0.1-SNAPSHOT.jar
+  ```
+
+* Or, you can do this with the spring-boot plugin.
+  ```
+  $ ./mvnv spring-boot::run
+  ```
 
 ## Demo
 
+There are several methods to test the application.
+
 ### Swagger UI
+
+OpenApi support is provided within the application. After the application is running, you can test the APIs with the
+relevant URL.
+
 * http://localhost:8080/swagger-ui/index.html
 
 ### Postman Collection
-* You can import collection file to your postman
+
+Prepared a collection for you to test with Postman. Just import the `Accounting.postman_collection.json` file with
+postman.
 
 ### CURL
 
