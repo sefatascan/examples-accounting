@@ -36,7 +36,7 @@ $ cd accounting
 
 ### docker
 
-In this step, you can run the application with only the docker requirement. It may take some time if the _images_ it
+In this step, you can run the application with only the `docker` requirement. It may take some time if the _images_ it
 needs are not available.
 
 Before running the command, you should check the available of the ports on your PC.
@@ -61,11 +61,17 @@ $ docker-compose up -d
 
 ### maven
 
-In this step, you need java and set it as environment variable.
+In this step, you need `java` and set it as environment variable. Also you need `PostgreSQL`. You should check server
+port
+
+```yml
+  datasource:
+    url: jdbc:postgresql://localhost:5435/accounting
+```
 
 * If you want to package and run the application.
   ```
-  $ ./mvnv clean install
+  $ ./mvnv package -DskipTests=true
   $ java -jar target/accounting-0.0.1-SNAPSHOT.jar
   ```
 
@@ -91,4 +97,60 @@ Prepared a collection for you to test with Postman. Just import the `Accounting.
 postman.
 
 ### CURL
+
+<details>
+  <summary>[POST] /v1/specialist</summary>
+  
+  ```bash
+  curl -X 'POST' \
+    'http://localhost:8080/v1/specialist' \
+    -H 'accept: application/json' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@gmail.com"
+  }'
+  ```
+</details>
+
+<details>
+  <summary>[POST] /v1/transaction</summary>
+
+  ```bash
+  curl -X 'POST' \
+    'http://localhost:8080/v1/transaction' \
+    -H 'accept: */*' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@gmail.com",
+    "amount": 150,
+    "productName": "TSD",
+    "billNo": "TR010"
+  }'
+  ```
+</details>
+
+<details>
+  <summary>[GET] /v1/transaction/successuf</summary>
+
+  ```bash
+  curl -X 'GET' \
+    'http://localhost:8080/v1/transaction/successful?size=5&page=0' \
+    -H 'accept: */*'
+  ```
+</details>
+
+<details>
+  <summary>[GET] /v1/transaction/failed</summary>
+
+  ```bash
+  curl -X 'GET' \
+    'http://localhost:8080/v1/transaction/failed?size=5&page=0' \
+    -H 'accept: */*'
+  ```
+</details>
+
 
