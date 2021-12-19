@@ -19,9 +19,6 @@ public class Transaction extends AbstractEntity {
     private BigDecimal amount;
 
     private String productName;
-
-    //TODO: fail olduğunda unique olmamalı
-    @Column(unique = true, nullable = false)
     private String billNo;
 
     @Enumerated(EnumType.STRING)
