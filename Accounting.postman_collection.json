@@ -1,0 +1,279 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Accounting",
+		"_postman_id": "b82d5ae1-04c0-0a90-39df-62aae51a44c3",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"description": "",
+			"item": [
+				{
+					"name": "Transaction",
+					"description": "",
+					"item": [
+						{
+							"name": "Successfull transactions with pageable",
+							"request": {
+								"url": {
+									"raw": "http://localhost:8080/v1/transaction/successful?size=5&page=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"transaction",
+										"successful"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "5",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Failed transactions with pageable",
+							"request": {
+								"url": {
+									"raw": "http://localhost:8080/v1/transaction/failed?size=5&page=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"transaction",
+										"failed"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "5",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Transaction successfull",
+							"request": {
+								"url": "http://localhost:8080/v1/transaction/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Olivia\",\r\n  \"lastName\": \"Dunham\",\r\n  \"email\": \"olivia.dunham@gmail.com\",\r\n  \"amount\": 150,\r\n  \"productName\": \"UTRK\",\r\n  \"billNo\": \"TR0001\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Transaction failed because of validation, well-formed email",
+							"request": {
+								"url": "http://localhost:8080/v1/transaction/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Olivia\",\r\n  \"lastName\": \"Dunham\",\r\n  \"email\": \"olivia.dunhum\",\r\n  \"amount\": 150,\r\n  \"productName\": \"UTRK\",\r\n  \"billNo\": \"TR0001\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Transaction failed beacuse of validation, amount min value",
+							"request": {
+								"url": "http://localhost:8080/v1/transaction/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Olivia\",\r\n  \"lastName\": \"Dunham\",\r\n  \"email\": \"olivia.dunham@gmail.com\",\r\n  \"amount\": -200,\r\n  \"productName\": \"UTRK\",\r\n  \"billNo\": \"TR0004\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Transaction failed because of specialist not found",
+							"request": {
+								"url": "http://localhost:8080/v1/transaction/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"test\",\r\n  \"lastName\": \"test\",\r\n  \"email\": \"testm@gmail.com\",\r\n  \"amount\": 150,\r\n  \"productName\": \"UTRK\",\r\n  \"billNo\": \"TR0001\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Transaction failed beacuse of transaction limit exceeded",
+							"request": {
+								"url": "http://localhost:8080/v1/transaction/",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Olivia\",\r\n  \"lastName\": \"Dunham\",\r\n  \"email\": \"olivia.dunham@gmail.com\",\r\n  \"amount\": 210,\r\n  \"productName\": \"UTRK\",\r\n  \"billNo\": \"TR0002\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Specialist",
+					"description": "",
+					"item": [
+						{
+							"name": "Create specialist successful",
+							"request": {
+								"url": "http://localhost:8080/v1/specialist",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Olivia\",\r\n  \"lastName\": \"Dunham\",\r\n  \"email\": \"olivia.dunham@gmail.com\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Create specialist failed because of validation, blank field",
+							"request": {
+								"url": "http://localhost:8080/v1/specialist",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"Dunham\",\r\n  \"email\": \"olivia.dunham@gmail.com\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Create specialist failed because of validation, well-formed email",
+							"request": {
+								"url": "http://localhost:8080/v1/specialist",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Olivia\",\r\n  \"lastName\": \"Dunham\",\r\n  \"email\": \"olivia.dunham\"\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
