@@ -1,7 +1,6 @@
 package com.sefa.accounting.controller;
 
 import com.sefa.accounting.dto.request.TransactionRequest;
-import com.sefa.accounting.dto.response.BaseResponse;
 import com.sefa.accounting.dto.response.TransactionDetailResponse;
 import com.sefa.accounting.model.TransactionStatus;
 import com.sefa.accounting.service.TransactionService;
@@ -59,8 +58,7 @@ public class TransactionController {
             @ApiResponse(responseCode = "409", description = "Returns if bill no has already been accepted",
                     content = @Content)})
     @PostMapping
-    public ResponseEntity<BaseResponse<String>> createTransaction(@Valid @RequestBody TransactionRequest transactionRequest) {
-        TransactionDetailResponse transactionDetailResponse = transactionService.createTransaction(transactionRequest);
-        return new ResponseEntity(transactionDetailResponse, HttpStatus.OK);
+    public ResponseEntity<TransactionDetailResponse> createTransaction(@Valid @RequestBody TransactionRequest transactionRequest) {
+        return new ResponseEntity(transactionService.createTransaction(transactionRequest), HttpStatus.OK);
     }
 }
