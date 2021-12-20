@@ -13,7 +13,14 @@ springdoc:
   api-docs:
     path: /api-docs
   swagger-ui:
-    path: /v1/swagger-ui.html
+    path: /swagger-ui-custom.html
+    disable-swagger-default-url: true
+  customProps:
+    title: Accounting API Documentation
+    version: 1.0
+    author:
+      name: Sefa Tascan
+      email: sefatascan@hotmail.com
 
 application:
   transaction:
