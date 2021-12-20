@@ -89,7 +89,7 @@ There are several methods to test the application.
 OpenApi support is provided within the application. After the application is running, you can test the APIs with the
 relevant URL.
 
-* http://localhost:8080/swagger-ui/index.html
+* http://localhost:8080/swagger-ui-custom.html
 
 ### Postman Collection
 
